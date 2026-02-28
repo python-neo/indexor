@@ -6,27 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
 -
+
+## [0.2.2] - 2026-02-28
+
+### Added
+
+- Added quoted-query parsing in `main/utils.py` via `parse_query`.
+- Added phrase-search logic in `main/search.py` using positional matching.
+
+### Changed
+
+- Updated CLI output in `main/main.py` to label results as `Word` or `Phrase` dynamically.
+- Updated search flow to handle mixed queries containing both normal terms and quoted phrases.
 
 ## [0.2.1] - 2026-02-28
 
-### Changed (0.2.1)
+### Changed
 
 - Expanded the .gitignore to remove other junk files.
 
-### Deleted (0.2.1)
+### Deleted
 
 - Removed `__pycache__`
 
 ## [0.2.0] - 2026-02-28
 
-### Added (0.2.0)
+### Added
 
 - `requirements.txt` with pinned `rich` dependency.
 - Search implementation in `main/search.py` for token-to-file lookups.
 
-### Changed (0.2.0)
+### Changed
 
 - Updated startup/runtime flow in `main/main.py`:
   - reads/writes `main/remember.json`
@@ -42,17 +53,17 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [0.1.0] - 2026-02-28
 
-### Added (0.1.0)
+### Added
 
 - Initial documentation files: `README.md`, `CHANGELOG.md`, and `CONTRIBUTING.md`
 - Rich console theme module at `main/console.py`
 - Initial startup flow in `main/main.py` for loading/saving preferred data folder
 
-### Changed (0.1.0)
+### Changed
 
 - Enforced immediate invalid-path rejection in prompt loop
 - Persist preferences only after valid directory input
 
-### Security (0.1.0)
+### Security
 
 - Ignore local preference file `main/remember.json` via `.gitignore`
