@@ -9,6 +9,16 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 -
 
+## [0.2.1] - 2026-02-28
+
+### Changed (0.2.1)
+
+- Expanded the .gitignore to remove other junk files.
+
+### Deleted (0.2.1)
+
+- Removed `__pycache__`
+
 ## [0.2.0] - 2026-02-28
 
 ### Added (0.2.0)
