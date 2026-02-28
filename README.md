@@ -65,7 +65,7 @@ Output behavior:
 ## Current Limitations
 
 - No ranking/scoring of results
-- No phrase/proximity matching
+- No proximity/slop phrase matching (only exact quoted phrases)
 - Index is rebuilt every run
 - UTF-8 text reading only
 
@@ -73,5 +73,5 @@ Output behavior:
 
 - Persist and reuse built index
 - Add ranked retrieval (TF-IDF/BM25)
-- Add phrase search
+- Add advanced phrase operators (proximity/slop)
 - Add automated tests

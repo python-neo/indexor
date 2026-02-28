@@ -58,8 +58,9 @@ def main () -> None :
             console.print ("[warning]No query words found.[/]")
             continue
 
-        for word, files in results.items () :
-            console.print (f"Word : {word}", style = "word")
+        for key, files in results.items () :
+            label = "Phrase" if key.startswith ('"') and key.endswith ('"') else "Word"
+            console.print (f"[word]{label} : {key}[/]")
             if not files :
                 console.print ("    [warning]No files found.[/]")
                 continue
