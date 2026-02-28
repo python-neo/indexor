@@ -1,58 +1,77 @@
 # INDEXOR
 
-`INDEXOR` is a lightweight Python text search project that builds an inverted index from `.txt` files and lets you search by word from the command line.
+`INDEXOR` is a lightweight CLI search tool that builds an inverted index over `.txt` and `.md` files.
+
+## Requirements
+
+- Python 3.10+
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Project Structure
 
 ```text
-indexor/
+Indexor/
 |
-|-- main.py
-|-- indexer.py
-|-- search.py
-|-- utils.py
-`-- data/
+|-- main/
+|   |-- __init__.py
+|   |-- main.py
+|   |-- indexer.py
+|   |-- search.py
+|   |-- utils.py
+|   |-- console.py
+|   `-- remember.json (generated locally)
+|-- README.md
+|-- CHANGELOG.md
+`-- CONTRIBUTING.md
 ```
-
-Put your `.txt` files inside the `data/` folder.
 
 ## How It Works
 
-1. `indexer.py` scans all `.txt` files under `data/`.
-2. `utils.py` tokenizes text into lowercase alphabetical words.
-3. `search.py` matches query words against the index.
-4. `main.py` provides an interactive CLI loop.
-
-## Requirements
-
-- Python 3.8+
+1. `main/main.py` loads/saves your preferred folder path in `main/remember.json`.
+2. `main/indexer.py` recursively scans the folder for `.txt` and `.md` files.
+3. `main/utils.py` tokenizes text to lowercase alphabetic words.
+4. `main/search.py` searches query tokens in the built index.
+5. Results are printed per query word in the CLI.
 
 ## Run
 
-From inside the project folder:
+From the project root:
 
 ```bash
-python main.py
+python -m main.main
 ```
 
-Example query:
+On first run, you will be prompted for a folder path to index. That path is stored in `main/remember.json` and reused in future runs.
+
+## Query Example
+
+Input:
 
 ```text
 black hole war
 ```
 
-The tool returns matching files for each query word separately.
+Output behavior:
+
+- Prints each query word
+- Shows matching file paths for each word
+- Shows `No files found.` if none match
 
 ## Current Limitations
 
-- No ranking/scoring of results.
-- No phrase/proximity matching.
-- Index is rebuilt on each run.
-- Supports `.txt` files only.
+- No ranking/scoring of results
+- No phrase/proximity matching
+- Index is rebuilt every run
+- UTF-8 text reading only
 
 ## Roadmap Ideas
 
-- Persist index to disk.
-- Add TF-IDF or BM25 ranking.
-- Support phrase search.
-- Add tests and CLI flags.
+- Persist and reuse built index
+- Add ranked retrieval (TF-IDF/BM25)
+- Add phrase search
+- Add automated tests

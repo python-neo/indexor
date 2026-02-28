@@ -6,10 +6,16 @@ Thanks for contributing. This project is intentionally simple, so please keep ch
 
 1. Ensure Python 3.10+ is installed.
 2. Clone the repository and open the project folder.
-3. Run the app:
+3. Install dependencies:
 
 ```bash
-python main.py
+pip install -r requirements.txt
+```
+
+4. Run the app:
+
+```bash
+python -m main.main
 ```
 
 ## Code Style

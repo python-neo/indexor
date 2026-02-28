@@ -3,15 +3,15 @@ from rich.theme import Theme
 
 theme = Theme (
     {
-        "info" : "bold cyan",
-        "success" : "bold green",
-        "warning" : "bold yellow",
-        "error" : "bold red",
-        "prompt" : "bold bright_white",
-        "title" : "bold magenta",
+        "info" : "cyan",
+        "success" : "green",
+        "warning" : "yellow",
+        "error" : "red",
+        "prompt" : "bright_white",
+        "title" : "magenta",
         "result" : "white",
         "path" : "underline blue",
-        "word" : "bold bright_cyan",
+        "word" : "bright_cyan",
     }
 )
 
