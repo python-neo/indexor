@@ -6,7 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
--
+
+## [0.3.0] - 2026-03-01
+
+### Added
+
+- Added BM25 ranking flow using indexed document statistics (`doc_lens`, `N`, `avg_doc_len`).
+- Added debug CLI flag (`--debug`) to print per-result scores.
+
+### Changed
+
+- Updated search behavior to return one ranked result list for the whole query.
+- Integrated quoted-phrase handling with positional checks during ranked retrieval.
+- Updated `README.md` to reflect ranked output, phrase behavior, and debug usage.
+
+### Fixed
+
+- Fixed non-debug output path in `main/main.py` so file results print correctly instead of blank lines.
 
 ## [0.2.2] - 2026-02-28
 

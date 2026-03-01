@@ -1,6 +1,6 @@
 # INDEXOR
 
-`INDEXOR` is a lightweight CLI search tool that builds an inverted index over `.txt` and `.md` files.
+`INDEXOR` is a lightweight CLI search tool that builds an inverted index over `.txt` and `.md` files and returns ranked matches using BM25.
 
 ## Requirements
 
@@ -35,8 +35,8 @@ Indexor/
 1. `main/main.py` loads/saves your preferred folder path in `main/remember.json`.
 2. `main/indexer.py` recursively scans the folder for `.txt` and `.md` files.
 3. `main/utils.py` tokenizes text to lowercase alphabetic words.
-4. `main/search.py` searches query tokens in the built index.
-5. Results are printed per query word in the CLI.
+4. `main/search.py` parses normal terms and quoted phrases, filters by phrase matches, and ranks files with BM25.
+5. Results are printed as a ranked list of file paths.
 
 ## Run
 
@@ -46,6 +46,12 @@ From the project root:
 python -m main.main
 ```
 
+Optional debug mode:
+
+```bash
+python -m main.main --debug
+```
+
 On first run, you will be prompted for a folder path to index. That path is stored in `main/remember.json` and reused in future runs.
 
 ## Query Example
@@ -53,18 +59,18 @@ On first run, you will be prompted for a folder path to index. That path is stor
 Input:
 
 ```text
-black hole war
+black "black hole" war
 ```
 
 Output behavior:
 
-- Prints each query word
-- Shows matching file paths for each word
-- Shows `No files found.` if none match
+- Returns a ranked file list for the whole query
+- Quoted phrases are checked using positional adjacency
+- In `--debug`, scores are printed beside each file
+- Shows `Oops! No results hiding here.` if nothing matches
 
 ## Current Limitations
 
-- No ranking/scoring of results
 - No proximity/slop phrase matching (only exact quoted phrases)
 - Index is rebuilt every run
 - UTF-8 text reading only
@@ -72,6 +78,6 @@ Output behavior:
 ## Roadmap Ideas
 
 - Persist and reuse built index
-- Add ranked retrieval (TF-IDF/BM25)
+- Add configurable ranking options
 - Add advanced phrase operators (proximity/slop)
 - Add automated tests
