@@ -7,6 +7,21 @@ from .search import search
 from rich.panel import Panel
 from argparse import ArgumentParser
 
+def get_result_title (file_path : Path) -> str :
+    if file_path.suffix.lower () in (".md", ".markdown") :
+        try :
+            with file_path.open ("r", encoding = "utf-8") as f :
+                first_line = f.readline ().strip ()
+            if first_line.startswith ("#") :
+                heading = first_line.lstrip ("#").strip ()
+                if heading :
+                    return heading
+        except (OSError, UnicodeError) :
+            pass
+
+    stem = file_path.stem.replace ("_", " ").strip ()
+    return stem.title () if stem else file_path.stem
+
 def main (debug) -> None :
     remember = Path (__file__).resolve ().parent / "remember.json"
     data : dict = {}
@@ -57,19 +72,30 @@ def main (debug) -> None :
 
         results = search (query, index, doc_lens, N, avg_doc_len)
         if not results :
-            console.print ("[warning]Oops! No results hiding here.[/]")
+            console.print ("[warning]Oops! No results here.[/]")
             continue
 
-        for file, score in results :
+        for i, (file, score) in enumerate (results) :
+            file_path = Path (file).resolve ()
+            try :
+                shown = str (file_path.relative_to (folder))
+            except ValueError :
+                shown = str (file_path)
+
+            title = get_result_title (file_path)
+            if i > 0 :
+                console.print ("")
+            console.print (f"[title]{title}[/]")
+
             if debug :
-                console.print (f"[path]{file}[/] - [info]{score:.4f}[/]")
+                console.print (f"[path]{shown}[/] - [info]{score:.4f}[/]")
             else :
-                console.print (f"[path]{file}[/]")
+                console.print (f"[path]{shown}[/]")
 
 if __name__ == "__main__" :
     argparse = ArgumentParser ()
     argparse.add_argument ("--debug", action = "store_true", help = "Debug flag for developers.")
     args = argparse.parse_args ()
     debug = args.debug
-    console.print (Panel ("Welcome to INDEXOR!", title = "[title]Indexor[/]", padding = (0, 1)))
+    console.print (Panel ("[success]Welcome to INDEXOR![/]", title = "[title]Indexor[/]", padding = (0, 1)))
     main (debug)

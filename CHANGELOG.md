@@ -7,6 +7,23 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-03-01
+
+### Changed
+
+- Updated result rendering in `main/main.py`:
+  - shows result titles in `[title]` style above links
+  - displays links as paths relative to the indexed folder
+  - inserts a blank line between results
+- Improved title generation:
+  - Markdown uses first-line `# Heading` when present
+  - fallback uses filename without extension, with underscores removed and title-casing
+- Updated no-results message to `Oops! No results here.`
+
+### Documentation
+
+- Updated `README.md` output behavior to match the current UI.
+
 ## [0.3.0] - 2026-03-01
 
 ### Added
@@ -22,7 +39,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Fixed
 
-- Fixed non-debug output path in `main/main.py` so file results print correctly instead of blank lines.
+- Fixed non-debug output path in `main/main.py` so file results print correctly 
+instead of blank lines.
 
 ## [0.2.2] - 2026-02-28
 
@@ -34,7 +52,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 ### Changed
 
 - Updated CLI output in `main/main.py` to label results as `Word` or `Phrase` dynamically.
-- Updated search flow to handle mixed queries containing both normal terms and quoted phrases.
+- Updated search flow to handle mixed queries containing both normal terms and 
+quoted phrases.
 
 ## [0.2.1] - 2026-02-28
 
@@ -63,7 +82,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Updated `main/indexer.py` to recursively index `.txt` and `.md` files.
 - Updated project docs:
   - `README.md` now reflects package layout and `python -m main.main` usage
-  - `CONTRIBUTING.md` now uses `pip install -r requirements.txt` and module run command
+  - `CONTRIBUTING.md` now uses `pip install -r requirements.txt` and module run 
+  command.
 - Renamed GitLab pipeline file from `.gitlab_ci.yml` to `.gitlab-ci.yml`.
 - `.gitignore` now excludes `main/__pycache__/` in addition to `main/remember.json`.
 

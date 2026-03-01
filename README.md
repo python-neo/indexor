@@ -66,8 +66,13 @@ Output behavior:
 
 - Returns a ranked file list for the whole query
 - Quoted phrases are checked using positional adjacency
+- Each result shows a title above the path:
+  - Markdown files use first-line `# Heading` when available
+  - Other files use formatted filename (no extension, underscores removed, title-cased)
+- Paths are shown relative to the indexed folder
+- Blank line is inserted between results for readability
 - In `--debug`, scores are printed beside each file
-- Shows `Oops! No results hiding here.` if nothing matches
+- Shows `Oops! No results here.` if nothing matches
 
 ## Current Limitations
 
