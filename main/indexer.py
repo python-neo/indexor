@@ -1,8 +1,10 @@
 from pathlib import Path
 from .utils import tokenize
 
-def build_index (folder_path : str) -> dict :
+def build_index (folder_path : str) -> tuple [dict, dict, int, float] :
     index : dict [str, dict [str, list [int]]] = {}
+    doc_lens = {}
+
     for file in Path (folder_path).rglob ("*") :
         if file.suffix.lower () not in (".txt", ".md") : 
             continue
@@ -12,11 +14,16 @@ def build_index (folder_path : str) -> dict :
         except OSError :
             continue
 
-        for pos, word in enumerate (tokenize (text)) :
+        words = tokenize (text)
+        doc_lens [str (file)] = len (words)
+        
+        for pos, word in enumerate (words) :
             if word not in index :
                 index [word] = {}
             if str (file) not in index [word] :
                 index [word] [str (file)] = []
             index [word] [str (file)].append (pos)
 
-    return index
+    N = len (doc_lens)
+    avg_doc_len = (sum (doc_lens.values ()) / N) if N else 0.0
+    return index, doc_lens, N, avg_doc_len

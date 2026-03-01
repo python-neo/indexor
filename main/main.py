@@ -5,8 +5,9 @@ from .console import console
 from .indexer import build_index
 from .search import search
 from rich.panel import Panel
+from argparse import ArgumentParser
 
-def main () -> None :
+def main (debug) -> None :
     remember = Path (__file__).resolve ().parent / "remember.json"
     data : dict = {}
 
@@ -45,28 +46,30 @@ def main () -> None :
         break
 
     with console.status ("[info]Building index...[/]", spinner = "dots") :
-        index = build_index (str (folder))
-    console.print ("Index built.", style = "success")
+        index, doc_lens, N, avg_doc_len = build_index (str (folder))
+    if debug :
+        console.print ("Index built.", style = "success")
 
     while True :
         query = Prompt.ask ("[prompt]Search (or type 'exit')[/]", console = console).strip ()
         if query.lower () == "exit" : 
             return
 
-        results = search (query, index)
+        results = search (query, index, doc_lens, N, avg_doc_len)
         if not results :
-            console.print ("[warning]No query words found.[/]")
+            console.print ("[warning]Oops! No results hiding here.[/]")
             continue
 
-        for key, files in results.items () :
-            label = "Phrase" if key.startswith ('"') and key.endswith ('"') else "Word"
-            console.print (f"[word]{label} : {key}[/]")
-            if not files :
-                console.print ("    [warning]No files found.[/]")
-                continue
-            for file in files :
-                console.print (f"  [path]{file}[/]")
+        for file, score in results :
+            if debug :
+                console.print (f"[path]{file}[/] - [info]{score:.4f}[/]")
+            else :
+                console.print (f"[path]{file}[/]")
 
 if __name__ == "__main__" :
+    argparse = ArgumentParser ()
+    argparse.add_argument ("--debug", action = "store_true", help = "Debug flag for developers.")
+    args = argparse.parse_args ()
+    debug = args.debug
     console.print (Panel ("Welcome to INDEXOR!", title = "[title]Indexor[/]", padding = (0, 1)))
-    main ()
+    main (debug)
