@@ -7,6 +7,18 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-03-02
+
+### Added
+
+- Added `+` adjacency requirement semantics in query parsing:
+  - `left + right` marks both adjacent clauses as required.
+
+### Changed
+
+- Updated ranked search filtering to enforce required terms and required phrases from `+` clauses.
+- Updated README query documentation and examples for `+` behavior.
+
 ## [0.3.1] - 2026-03-01
 
 ### Changed
