@@ -13,6 +13,55 @@ def parse_query (query : str) -> tuple [list [str], list [str]] :
     terms = tokenize (unquoted)
     return terms, phrases
 
+def _uko (items : list) -> list [str] :
+    seen : set = set ()
+    return [x for x in items if not (x in seen or seen.add (x))]
+
+def parse_query_with_requirements (query : str) -> tuple [list [str], list [str], list [str], list [str]] :
+    tokens = findall (r'"[^"]+"|\+|[^\s"]+', query)
+    clauses : list [str] = []
+    plus_between : list [bool] = []
+
+    for token in tokens :
+        if token == "+" :
+            pending_plus = True
+            continue
+
+        clauses.append (token)
+        if len (clauses) > 1 :
+            plus_between.append (pending_plus)
+        pending_plus = False
+
+    required_clause = [False] * len (clauses)
+    for i, is_plus in enumerate (plus_between) :
+        if is_plus :
+            required_clause [i] = True
+            required_clause [i + 1] = True
+
+    terms, phrases, required_terms, required_phrases = [], [], [], []
+    for i, clause in enumerate (clauses) :
+        is_required = required_clause [i]
+        is_quoted = clause.startswith ('"') and clause.endswith ('"') and len (clause) >= 2
+        raw = clause [1:-1] if is_quoted else clause
+        words = tokenize (raw)
+        if not words :
+            continue
+
+        if is_quoted :
+            phrase = " ".join (words)
+            phrases.append (phrase)
+            if is_required :
+                required_phrases.append (phrase)
+        else :
+            terms.extend (words)
+            if is_required :
+                required_terms.extend (words)
+
+    if clauses and not required_terms and not required_phrases :
+        required_terms, required_phrases = terms.copy (), phrases.copy ()
+
+    return (_uko (terms), _uko (phrases), _uko (required_terms), _uko (required_phrases),)
+
 def idf (N : int, df : int) -> float :
     return log (((N - df + 0.5) / (df + 0.5)) + 1.0)
 

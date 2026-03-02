@@ -35,7 +35,7 @@ Indexor/
 1. `main/main.py` loads/saves your preferred folder path in `main/remember.json`.
 2. `main/indexer.py` recursively scans the folder for `.txt` and `.md` files.
 3. `main/utils.py` tokenizes text to lowercase alphabetic words.
-4. `main/search.py` parses normal terms and quoted phrases, filters by phrase matches, and ranks files with BM25.
+4. `main/search.py` parses normal terms and quoted phrases, enforces required clauses, and ranks files with BM25.
 5. Results are printed as a ranked list of file paths.
 
 ## Run
@@ -59,13 +59,17 @@ On first run, you will be prompted for a folder path to index. That path is stor
 Input:
 
 ```text
-black "black hole" war
+"black hole" + space spaceship
 ```
 
 Output behavior:
 
 - Returns a ranked file list for the whole query
 - Quoted phrases are checked using positional adjacency
+- `+` marks both adjacent clauses as required (`left + right`)
+  - Example: `"black hole" + space spaceship`
+  - required: `"black hole"` and `space`
+  - optional: `spaceship` (still affects ranking if present)
 - Each result shows a title above the path:
   - Markdown files use first-line `# Heading` when available
   - Other files use formatted filename (no extension, underscores removed, title-cased)
