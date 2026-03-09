@@ -19,4 +19,16 @@ theme = Theme (
     }
 )
 
-console = Console (theme = theme)
+def get_console (no_colour : bool = False) -> Console :
+    """
+    Build a Rich console instance for INDEXOR.
+
+    Parameters :
+        no_colour (bool) : Disable terminal colours when `True`.
+
+    Returns :
+        Console : Configured Rich console.
+    """
+    return Console (theme = theme, no_color = no_colour)
+
+console = get_console ()
