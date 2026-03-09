@@ -1,11 +1,14 @@
 ﻿from json import load, dump, JSONDecodeError
 from pathlib import Path
 from rich.prompt import Prompt
-from .console import console
+from .console import get_console
 from .indexer import build_index
 from .search import search
 from rich.panel import Panel
 from argparse import ArgumentParser
+from textwrap import dedent
+
+console = get_console ()
 
 def get_result_title (file_path : Path) -> str :
     """
@@ -34,7 +37,27 @@ def get_result_title (file_path : Path) -> str :
     stem = file_path.stem.replace ("_", " ").strip ()
     return stem.title () if stem else file_path.stem
 
-def main (debug) -> None :
+def print_help () -> None :
+    """
+    Render the CLI help panel for INDEXOR.
+    """
+    body = dedent ("""
+        [word]Usage[/]
+        python -m main.main [--debug] [--help] [--no-colour]
+
+        [word]Flags[/]
+        [success]--debug[/]      Show BM25 score beside each result
+        [success]--help[/]       Show this help panel
+        [success]--no-colour[/]  Disable coloured output
+
+        [word]Query Notes[/]
+        - Quoted phrases are supported: [info]"black hole"[/]
+        - [info]+[/] marks adjacent clauses as required
+        - Type [warning]quit[/] to exit, or choose [warning]n[/] to search [warning]quit[/]
+        """).strip ()
+    console.print (Panel (body, title = "[title]Indexor[/]", padding = (0, 1)))
+
+def main (debug : bool, no_colour : bool = False) -> None :
     """
     Run the INDEXOR interactive CLI loop.
 
@@ -43,7 +66,11 @@ def main (debug) -> None :
 
     Parameters :
         debug (bool) : Enables debug output such as scoring details.
+        no_colour (bool) : Disable coloured output when `True`.
     """
+    global console
+    console = get_console (no_colour = no_colour)
+
     remember = Path (__file__).resolve ().parent / "remember.json"
     data : dict = {}
 
@@ -87,9 +114,12 @@ def main (debug) -> None :
         console.print ("Index built.", style = "success")
 
     while True :
-        query = Prompt.ask ("[prompt]Search (or type 'exit')[/]", console = console).strip ()
-        if query.lower () == "exit" : 
-            return
+        query = Prompt.ask ("[prompt]Search (or type 'quit')[/]", console = console).strip ()
+        if query.lower () == "quit" :
+            answer = Prompt.ask ("[prompt]Do you want to quit? (y = quit, n = search 'quit')[/]", choices = ["y", "n"], default = "y", console = console)
+            if answer == "y" :
+                return
+            query = "quit"
 
         results = search (query, index, doc_lens, N, avg_doc_len)
         if not results :
@@ -114,9 +144,15 @@ def main (debug) -> None :
                 console.print (f"[path]{shown}[/]")
 
 if __name__ == "__main__" :
-    argparse = ArgumentParser ()
+    argparse = ArgumentParser (add_help = False)
     argparse.add_argument ("--debug", action = "store_true", help = "Debug flag for developers.")
+    argparse.add_argument ("--help", action = "store_true", help = "Show CLI help section.")
+    argparse.add_argument ("--no-colour", action = "store_true", help = "Disable coloured output.")
+    argparse.add_argument ("--version", action = "version", version = "Indexor 0.5.1")
     args = argparse.parse_args ()
-    debug = args.debug
-    console.print (Panel ("[success]Welcome to INDEXOR![/]", title = "[title]Indexor[/]", padding = (0, 1)))
-    main (debug)
+    console = get_console (no_colour = args.no_colour)
+    if args.help :
+        print_help ()
+    else :
+        console.print (Panel ("[success]Welcome to INDEXOR![/]", title = "[title]Indexor[/]", padding = (0, 1)))
+    main (args.debug, no_colour = args.no_colour)

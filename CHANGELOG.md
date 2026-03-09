@@ -9,6 +9,21 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 -
 
+## [0.5.1] - 2026-03-09
+
+### Added
+
+- Added CLI flag `--help` to render an in-app help panel.
+- Added CLI flag `--no-colour` to disable colored output.
+- Added CLI flag `--version` to print the current app version and exit.
+- Added quit confirmation prompt:
+  - `y` exits the app
+  - `n` runs a literal search for `quit`
+
+### Changed
+
+- Updated help panel usage and flags section to document current CLI options.
+
 ## [0.5.0] - 2026-03-02
 
 ### Added

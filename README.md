@@ -46,13 +46,23 @@ From the project root:
 python -m main.main
 ```
 
-Optional debug mode:
+Optional flags:
 
 ```bash
 python -m main.main --debug
+python -m main.main --help
+python -m main.main --no-colour
+python -m main.main --version
 ```
 
 On first run, you will be prompted for a folder path to index. That path is stored in `main/remember.json` and reused in future runs.
+
+Flag summary:
+
+- `--debug`: print BM25 score beside each result
+- `--help`: show the in-app help panel and exit
+- `--no-colour`: disable all colored terminal output
+- `--version`: print current INDEXOR version and exit
 
 ## Query Example
 
@@ -77,6 +87,9 @@ Output behavior:
 - Blank line is inserted between results for readability
 - In `--debug`, scores are printed beside each file
 - Shows `404. That's an error.` if nothing matches
+- Typing `quit` asks:
+  - `y` to quit
+  - `n` to search for the literal term `quit`
 
 ## Current Limitations
 
