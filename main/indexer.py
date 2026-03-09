@@ -2,6 +2,21 @@ from pathlib import Path
 from .utils import tokenize
 
 def build_index (folder_path : str) -> tuple [dict, dict, int, float] :
+    """
+    Build the inverted index and BM25 document statistics.
+
+    Scans the folder recursively and indexes `.txt` and `.md` files.
+
+    Parameters :
+        folder_path (str) : Root folder path to scan.
+
+    Returns :
+        tuple [dict, dict, int, float] :
+            - Inverted index as `{word : {file_path : [positions]}}`
+            - Document lengths as `{file_path : token_count}`
+            - Total indexed document count
+            - Average document length
+    """
     index : dict [str, dict [str, list [int]]] = {}
     doc_lens = {}
 

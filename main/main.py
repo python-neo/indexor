@@ -8,6 +8,18 @@ from rich.panel import Panel
 from argparse import ArgumentParser
 
 def get_result_title (file_path : Path) -> str :
+    """
+    Resolve display title for a result file.
+
+    For Markdown files, the first `# Heading` line is preferred.
+    Otherwise, title is derived from filename stem.
+
+    Parameters :
+        file_path (Path) : Resolved file path.
+
+    Returns :
+        str : Display title.
+    """
     if file_path.suffix.lower () in (".md", ".markdown") :
         try :
             with file_path.open ("r", encoding = "utf-8") as f :
@@ -23,6 +35,15 @@ def get_result_title (file_path : Path) -> str :
     return stem.title () if stem else file_path.stem
 
 def main (debug) -> None :
+    """
+    Run the INDEXOR interactive CLI loop.
+
+    Loads persisted folder preferences, builds index statistics, accepts
+    search queries, and renders ranked results.
+
+    Parameters :
+        debug (bool) : Enables debug output such as scoring details.
+    """
     remember = Path (__file__).resolve ().parent / "remember.json"
     data : dict = {}
 
@@ -72,7 +93,7 @@ def main (debug) -> None :
 
         results = search (query, index, doc_lens, N, avg_doc_len)
         if not results :
-            console.print ("[warning]Oops! No results here.[/]")
+            console.print ("[warning]404. That's an error.[/]")
             continue
 
         for i, (file, score) in enumerate (results) :

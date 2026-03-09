@@ -7,6 +7,29 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ## [Unreleased]
 
+-
+
+## [0.5.0] - 2026-03-02
+
+### Added
+
+- Added module and function docstrings across `main/*.py` following the
+established project docstring style.
+- Added Sphinx source pages for INDEXOR modules in `sphinx/source/`.
+
+### Changed
+
+- Updated no-results CLI message in `main/main.py` to `404. That's an error.`
+- Updated `README.md` output section to match current CLI behavior.
+- Updated Sphinx documentation structure and autodoc module mapping for the
+package layout.
+
+## [0.4.1] - 2026-03-02
+
+### Added
+
+- Added `LICENSE` (MIT).
+
 ## [0.4.0] - 2026-03-02
 
 ### Added
@@ -16,7 +39,8 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Changed
 
-- Updated ranked search filtering to enforce required terms and required phrases from `+` clauses.
+- Updated ranked search filtering to enforce required terms and required phrases
+from `+` clauses.
 - Updated README query documentation and examples for `+` behavior.
 
 ## [0.3.1] - 2026-03-01
@@ -51,7 +75,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 ### Fixed
 
-- Fixed non-debug output path in `main/main.py` so file results print correctly 
+- Fixed non-debug output path in `main/main.py` so file results print correctly
 instead of blank lines.
 
 ## [0.2.2] - 2026-02-28
@@ -64,7 +88,7 @@ instead of blank lines.
 ### Changed
 
 - Updated CLI output in `main/main.py` to label results as `Word` or `Phrase` dynamically.
-- Updated search flow to handle mixed queries containing both normal terms and 
+- Updated search flow to handle mixed queries containing both normal terms and
 quoted phrases.
 
 ## [0.2.1] - 2026-02-28
@@ -94,7 +118,7 @@ quoted phrases.
 - Updated `main/indexer.py` to recursively index `.txt` and `.md` files.
 - Updated project docs:
   - `README.md` now reflects package layout and `python -m main.main` usage
-  - `CONTRIBUTING.md` now uses `pip install -r requirements.txt` and module run 
+  - `CONTRIBUTING.md` now uses `pip install -r requirements.txt` and module run
   command.
 - Renamed GitLab pipeline file from `.gitlab_ci.yml` to `.gitlab-ci.yml`.
 - `.gitignore` now excludes `main/__pycache__/` in addition to `main/remember.json`.

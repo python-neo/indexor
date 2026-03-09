@@ -76,7 +76,7 @@ Output behavior:
 - Paths are shown relative to the indexed folder
 - Blank line is inserted between results for readability
 - In `--debug`, scores are printed beside each file
-- Shows `Oops! No results here.` if nothing matches
+- Shows `404. That's an error.` if nothing matches
 
 ## Current Limitations
 

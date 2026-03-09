@@ -1,6 +1,17 @@
 from .utils import parse_query_with_requirements, bm25_doc_score
 
 def _matches_phrase (phrase_words : list [str], file : str, index : dict [str, dict]) -> bool :
+    """
+    Check whether a phrase appears in order with adjacent positions.
+
+    Parameters :
+        phrase_words (list [str]) : Tokenized phrase words.
+        file (str) : File path to validate.
+        index (dict [str, dict]) : Inverted index with positions.
+
+    Returns :
+        bool : `True` if the phrase matches in the given file, else `False`.
+    """
     if not phrase_words :
         return True
     if any (w not in index or file not in index [w] for w in phrase_words) :
@@ -19,6 +30,24 @@ def _matches_phrase (phrase_words : list [str], file : str, index : dict [str, d
 
 def search (query : str, index : dict [str, dict], doc_lens : dict [str, int], 
             N : int, avg_doc_len : float) -> list [tuple [str, float]] :
+    """
+    Execute a ranked search query with required-clause support.
+
+    Query behavior :
+        - Quoted phrases are matched positionally.
+        - `+` marks adjacent clauses as required.
+        - Results are ranked using BM25.
+
+    Parameters :
+        query (str) : Raw user query.
+        index (dict [str, dict]) : Inverted index with postings and positions.
+        doc_lens (dict [str, int]) : Token counts per document.
+        N (int) : Total indexed document count.
+        avg_doc_len (float) : Average indexed document length.
+
+    Returns :
+        list [tuple [str, float]] : Ranked list of `(file_path, score)`.
+    """
     terms, phrases, required_terms, required_phrases = parse_query_with_requirements (query)
 
     phrase_terms : list [str] = []
