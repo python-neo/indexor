@@ -37,4 +37,5 @@ desktop.ini
 # Project local state
 remember.json
 main/remember.json
+main/results.json
 docs.bat

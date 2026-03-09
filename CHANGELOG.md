@@ -9,6 +9,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 -
 
+## [0.5.2] - 2026-03-09
+
+### Added
+
+- Added CLI flag `--ext` to filter output by extension (repeatable).
+- Added CLI flag `--top-k` to limit displayed ranked results.
+- Added CLI flag `--json` to dump each query result set to `main/results.json`.
+
+### Changed
+
+- Updated `--help` panel text to reflect file-dump behavior for `--json`.
+- Updated project docs (`README.md` and Sphinx config) for `0.5.2`.
+
 ## [0.5.1] - 2026-03-09
 
 ### Added
