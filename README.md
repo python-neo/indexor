@@ -53,6 +53,8 @@ python -m main.main --debug
 python -m main.main --help
 python -m main.main --no-colour
 python -m main.main --version
+python -m main.main --ext md --top-k 10
+python -m main.main --json
 ```
 
 On first run, you will be prompted for a folder path to index. That path is stored in `main/remember.json` and reused in future runs.
@@ -63,6 +65,9 @@ Flag summary:
 - `--help`: show the in-app help panel and exit
 - `--no-colour`: disable all colored terminal output
 - `--version`: print current INDEXOR version and exit
+- `--ext`: filter output by extension (repeatable, e.g. `--ext md --ext txt`)
+- `--top-k`: show only top `N` ranked results
+- `--json`: dump each query's results to `main/results.json` while keeping normal terminal output
 
 ## Query Example
 
@@ -90,6 +95,7 @@ Output behavior:
 - Typing `quit` asks:
   - `y` to quit
   - `n` to search for the literal term `quit`
+- When `--json` is set, each query also writes structured output to `main/results.json`
 
 ## Current Limitations
 
