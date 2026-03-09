@@ -2,10 +2,30 @@ from re import findall
 from math import log
 
 def tokenize (text : str) -> list [str] :
+    """
+    Normalize text into lowercase alphabetic tokens.
+
+    Parameters :
+        text (str) : Raw text input.
+
+    Returns :
+        list [str] : Tokenized word list.
+    """
     text = text.lower ()
     return findall (r"\b[a-z]+\b", text)
 
 def parse_query (query : str) -> tuple [list [str], list [str]] :
+    """
+    Parse query into plain terms and quoted phrases.
+
+    Parameters :
+        query (str) : Raw query string.
+
+    Returns :
+        tuple [list [str], list [str]] :
+            - Unquoted terms
+            - Quoted phrases
+    """
     phrase_parts = findall (r'"([^"]+)"', query)
     phrases = [" ".join (tokenize (p)) for p in phrase_parts if tokenize (p)]
     rest = findall (r'"[^"]+"|[^"]+', query)
@@ -14,10 +34,35 @@ def parse_query (query : str) -> tuple [list [str], list [str]] :
     return terms, phrases
 
 def _uko (items : list) -> list [str] :
+    """
+    Return unique items while preserving input order.
+
+    Parameters :
+        items (list) : Input item list.
+
+    Returns :
+        list [str] : De-duplicated ordered list.
+    """
     seen : set = set ()
     return [x for x in items if not (x in seen or seen.add (x))]
 
 def parse_query_with_requirements (query : str) -> tuple [list [str], list [str], list [str], list [str]] :
+    """
+    Parse query into optional and required terms/phrases.
+
+    Requirement rule :
+        `left + right` marks both adjacent clauses as required.
+
+    Parameters :
+        query (str) : Raw query string.
+
+    Returns :
+        tuple [list [str], list [str], list [str], list [str]] :
+            - Optional terms
+            - Optional phrases
+            - Required terms
+            - Required phrases
+    """
     tokens = findall (r'"[^"]+"|\+|[^\s"]+', query)
     clauses : list [str] = []
     plus_between : list [bool] = []
@@ -63,10 +108,35 @@ def parse_query_with_requirements (query : str) -> tuple [list [str], list [str]
     return (_uko (terms), _uko (phrases), _uko (required_terms), _uko (required_phrases),)
 
 def idf (N : int, df : int) -> float :
+    """
+    Compute BM25 inverse document frequency.
+
+    Parameters :
+        N (int) : Total number of documents.
+        df (int) : Number of documents containing the term.
+
+    Returns :
+        float : IDF score.
+    """
     return log (((N - df + 0.5) / (df + 0.5)) + 1.0)
 
 def bm25_term_score (tf : int, doc_len : int, avg_doc_len : float, N : int, 
                      df : int, k1 : float = 1.5, b : float = 0.75) -> float :
+    """
+    Compute BM25 contribution for one term in one document.
+
+    Parameters :
+        tf (int) : Term frequency in the document.
+        doc_len (int) : Document token count.
+        avg_doc_len (float) : Average token count across all documents.
+        N (int) : Total number of documents.
+        df (int) : Number of documents containing the term.
+        k1 (float) : BM25 term-frequency saturation parameter.
+        b (float) : BM25 length-normalization parameter.
+
+    Returns :
+        float : BM25 term score.
+    """
     if tf <= 0 or df <= 0 or N <= 0 or avg_doc_len <= 0 :
         return 0.0
 
@@ -76,6 +146,22 @@ def bm25_term_score (tf : int, doc_len : int, avg_doc_len : float, N : int,
 
 def bm25_doc_score (query_terms : list [str], file : str, index : dict [str, dict], doc_lens : dict,
                     N : int, avg_doc_len : float, k1 : float = 1.5, b : float = 0.75) -> float :
+    """
+    Compute total BM25 score for a document against query terms.
+
+    Parameters :
+        query_terms (list [str]) : Query terms used for scoring.
+        file (str) : File path to score.
+        index (dict [str, dict]) : Inverted index postings.
+        doc_lens (dict) : Token counts per document.
+        N (int) : Total number of documents.
+        avg_doc_len (float) : Average token count across all documents.
+        k1 (float) : BM25 term-frequency saturation parameter.
+        b (float) : BM25 length-normalization parameter.
+
+    Returns :
+        float : Total BM25 score for the given document.
+    """
     score = 0.0
     doc_len = doc_lens.get (file, 0)
 

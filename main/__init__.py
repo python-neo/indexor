@@ -1,0 +1,3 @@
+"""
+INDEXOR main package.
+"""
