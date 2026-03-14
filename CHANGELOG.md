@@ -9,6 +9,13 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 -
 
+## [0.6.0] - 2026-03-14
+
+### Added
+
+- Added GUI home screen entrypoint in `main/app.py`.
+- Added UI scaffold.
+
 ## [0.5.2] - 2026-03-09
 
 ### Added

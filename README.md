@@ -20,11 +20,14 @@ Indexor/
 |-- main/
 |   |-- __init__.py
 |   |-- main.py
+|   |-- app.py
 |   |-- indexer.py
 |   |-- search.py
 |   |-- utils.py
 |   |-- console.py
 |   `-- remember.json (generated locally)
+|-- IndexorSetup.zip
+|-- run_indexor.bat
 |-- README.md
 |-- CHANGELOG.md
 `-- CONTRIBUTING.md
@@ -56,6 +59,17 @@ python -m main.main --version
 python -m main.main --ext md --top-k 10
 python -m main.main --json
 ```
+
+GUI home screen:
+
+```bash
+python -m main.app
+```
+
+## Installer (Windows)
+
+`IndexorSetup.zip` contains the installer EXE. The installer copies files to
+`%LOCALAPPDATA%\Indexor` and creates a desktop shortcut.
 
 On first run, you will be prompted for a folder path to index. That path is stored in `main/remember.json` and reused in future runs.
 
