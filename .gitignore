@@ -38,4 +38,6 @@ desktop.ini
 remember.json
 main/remember.json
 main/results.json
+main/app2.py
 docs.bat
+/_build/
