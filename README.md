@@ -1,6 +1,6 @@
 # INDEXOR
 
-`INDEXOR` is a lightweight CLI search tool that builds an inverted index over `.txt` and `.md` files and returns ranked matches using BM25.
+`INDEXOR` is a lightweight search tool with both CLI and GUI entrypoints. It builds an inverted index over `.txt` and `.md` files and returns ranked matches using BM25.
 
 ## Requirements
 
@@ -65,6 +65,10 @@ GUI home screen:
 ```bash
 python -m main.app
 ```
+
+GUI notes:
+
+- Currently indexes `~/Desktop` on startup.
 
 ## Installer (Windows)
 

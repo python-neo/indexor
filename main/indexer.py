@@ -26,7 +26,7 @@ def build_index (folder_path : str) -> tuple [dict, dict, int, float] :
 
         try :
             text = file.read_text (encoding = "utf-8")
-        except OSError :
+        except (OSError, UnicodeDecodeError) :
             continue
 
         words = tokenize (text)

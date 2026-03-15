@@ -4,8 +4,8 @@ import os
 project = 'Indexor'
 copyright = '2026, Aarav Agarwal'
 author = 'Aarav Agarwal'
-version = '0.6.0'
-release = '0.6.0'
+version = '0.6.1'
+release = '0.6.1'
 
 extensions = [
     "sphinx.ext.autodoc",

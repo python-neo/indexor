@@ -9,12 +9,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 -
 
-## [0.6.0] - 2026-03-14
+## [0.6.1] - 2026-03-15
+
+### Changed
+
+- Updated GUI results layout to use relative positioning.
+- Results panel is now read-only during display.
+
+## [0.6.0] - 2026-03-15
 
 ### Added
 
 - Added GUI home screen entrypoint in `main/app.py`.
-- Added UI scaffold.
+- Added UI scaffold and on-screen results panel.
 
 ## [0.5.2] - 2026-03-09
 

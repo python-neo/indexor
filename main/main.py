@@ -189,7 +189,7 @@ if __name__ == "__main__" :
     argparse.add_argument ("--no-colour", action = "store_true", help = "Disable coloured output.")
     argparse.add_argument ("--ext", action = "append", default = None, help = "Filter output by extension; repeatable.")
     argparse.add_argument ("--top-k", type = positive_int, default = None, help = "Show only top N ranked results.")
-    argparse.add_argument ("--version", action = "version", version = "Indexor 0.6.0")
+    argparse.add_argument ("--version", action = "version", version = "Indexor 0.6.1")
     argparse.add_argument ("--json", action = "store_true", help = "Dump results to main/results.json.")
     args = argparse.parse_args ()
     console = get_console (no_colour = args.no_colour)

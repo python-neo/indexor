@@ -35,7 +35,6 @@ desktop.ini
 .vscode/
 
 # Project local state
-remember.json
 main/remember.json
 main/results.json
 main/app2.py
