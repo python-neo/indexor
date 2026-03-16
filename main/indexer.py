@@ -1,7 +1,7 @@
 from pathlib import Path
 from .utils import tokenize
 
-def build_index (folder_path : str) -> tuple [dict, dict, int, float] :
+def build_index (folder_path : str) -> tuple [dict , dict, int, float] :
     """
     Build the inverted index and BM25 document statistics.
 

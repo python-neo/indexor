@@ -15,6 +15,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Updated GUI results layout to use relative positioning.
 - Results panel is now read-only during display.
+- Added settings panel with folder selection and persistence via `remember.json`.
 
 ## [0.6.0] - 2026-03-15
 

@@ -28,8 +28,7 @@ def _matches_phrase (phrase_words : list [str], file : str, index : dict [str, d
             return True
     return False
 
-def search (query : str, index : dict [str, dict], doc_lens : dict [str, int], 
-            N : int, avg_doc_len : float) -> list [tuple [str, float]] :
+def search (query : str, index : dict, doc_lens : dict, N : int, avg_doc_len : float) -> list [tuple [str, float]] :
     """
     Execute a ranked search query with required-clause support.
 
