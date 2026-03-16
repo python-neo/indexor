@@ -68,7 +68,9 @@ python -m main.app
 
 GUI notes:
 
-- Currently indexes `~/Desktop` on startup.
+- Defaults to `~/Desktop` on first run.
+- Remembers your chosen folder in `main/remember.json`.
+- Use the settings panel (gear) to change the index folder.
 
 ## Installer (Windows)
 
