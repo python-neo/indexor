@@ -9,7 +9,19 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 -
 
-## [0.6.1] - 2026-03-15
+## [v0.6.4] - 2026-04-26
+
+### Changed
+
+- Updated `CHANGELOG.md`.
+
+## [v0.6.3] - 2026-04-22
+
+### Changed
+
+- Updated `requirements.txt` dependency pinning.
+
+## [v0.6.2] - 2026-03-16
 
 ### Changed
 
@@ -17,14 +29,25 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Results panel is now read-only during display.
 - Added settings panel with folder selection and persistence via `remember.json`.
 
-## [0.6.0] - 2026-03-15
+## [v0.6.1] - 2026-03-15
+
+### Added
+
+- Added on-screen results display in the GUI.
+
+### Changed
+
+- Updated `README.md`, Sphinx config, and related docs to match the GUI results
+ flow.
+
+## [v0.6.0] - 2026-03-15
 
 ### Added
 
 - Added GUI home screen entrypoint in `main/app.py`.
 - Added UI scaffold and on-screen results panel.
 
-## [0.5.2] - 2026-03-09
+## [v0.5.2] - 2026-03-09
 
 ### Added
 
@@ -37,7 +60,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 - Updated `--help` panel text to reflect file-dump behavior for `--json`.
 - Updated project docs (`README.md` and Sphinx config) for `0.5.2`.
 
-## [0.5.1] - 2026-03-09
+## [v0.5.1] - 2026-03-09
 
 ### Added
 
@@ -52,7 +75,7 @@ and this project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.ht
 
 - Updated help panel usage and flags section to document current CLI options.
 
-## [0.5.0] - 2026-03-02
+## [v0.5.0] - 2026-03-02
 
 ### Added
 
@@ -67,13 +90,13 @@ established project docstring style.
 - Updated Sphinx documentation structure and autodoc module mapping for the
 package layout.
 
-## [0.4.1] - 2026-03-02
+## [v0.4.1] - 2026-03-02
 
 ### Added
 
 - Added `LICENSE` (MIT).
 
-## [0.4.0] - 2026-03-02
+## [v0.4.0] - 2026-03-02
 
 ### Added
 
@@ -86,7 +109,7 @@ package layout.
 from `+` clauses.
 - Updated README query documentation and examples for `+` behavior.
 
-## [0.3.1] - 2026-03-01
+## [v0.3.1] - 2026-03-01
 
 ### Changed
 
@@ -103,7 +126,7 @@ from `+` clauses.
 
 - Updated `README.md` output behavior to match the current UI.
 
-## [0.3.0] - 2026-03-01
+## [v0.3.0] - 2026-03-01
 
 ### Added
 
@@ -121,7 +144,7 @@ from `+` clauses.
 - Fixed non-debug output path in `main/main.py` so file results print correctly
 instead of blank lines.
 
-## [0.2.2] - 2026-02-28
+## [v0.2.2] - 2026-02-28
 
 ### Added
 
@@ -134,7 +157,7 @@ instead of blank lines.
 - Updated search flow to handle mixed queries containing both normal terms and
 quoted phrases.
 
-## [0.2.1] - 2026-02-28
+## [v0.2.1] - 2026-02-28
 
 ### Changed
 
@@ -144,7 +167,7 @@ quoted phrases.
 
 - Removed `__pycache__`
 
-## [0.2.0] - 2026-02-28
+## [v0.2.0] - 2026-02-28
 
 ### Added
 
@@ -166,7 +189,7 @@ quoted phrases.
 - Renamed GitLab pipeline file from `.gitlab_ci.yml` to `.gitlab-ci.yml`.
 - `.gitignore` now excludes `main/__pycache__/` in addition to `main/remember.json`.
 
-## [0.1.0] - 2026-02-28
+## [v0.1.0] - 2026-02-28
 
 ### Added
 
@@ -182,3 +205,19 @@ quoted phrases.
 ### Security
 
 - Ignore local preference file `main/remember.json` via `.gitignore`
+
+[v0.6.3]: https://github.com/python-neo/indexor/compare/v0.6.2...HEAD
+[v0.6.2]: https://github.com/python-neo/indexor/compare/v0.6.1...v0.6.2
+[v0.6.1]: https://github.com/python-neo/indexor/compare/v0.6.0...v0.6.1
+[v0.6.0]: https://github.com/python-neo/indexor/compare/v0.5.2...v0.6.0
+[v0.5.2]: https://github.com/python-neo/indexor/compare/v0.5.1...v0.5.2
+[v0.5.1]: https://github.com/python-neo/indexor/compare/v0.5.0...v0.5.1
+[v0.5.0]: https://github.com/python-neo/indexor/compare/v0.4.1...v0.5.0
+[v0.4.1]: https://github.com/python-neo/indexor/compare/v0.4.0...v0.4.1
+[v0.4.0]: https://github.com/python-neo/indexor/compare/v0.3.1...v0.4.0
+[v0.3.1]: https://github.com/python-neo/indexor/compare/v0.3.0...v0.3.1
+[v0.3.0]: https://github.com/python-neo/indexor/compare/v0.2.2...v0.3.0
+[v0.2.2]: https://github.com/python-neo/indexor/compare/v0.2.1...v0.2.2
+[v0.2.1]: https://github.com/python-neo/indexor/compare/v0.2.0...v0.2.1
+[v0.2.0]: https://github.com/python-neo/indexor/compare/v0.1.0...v0.2.0
+[v0.1.0]: https://github.com/python-neo/indexor/compare/dba0f1aadc69082541edd8cc0363878427585934...v0.1.0
